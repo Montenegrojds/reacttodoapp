@@ -1,7 +1,6 @@
 import React from 'react';
 import Todolist from './components/todolist'
 
-
 class App extends React.Component {
   render(){
     return (
