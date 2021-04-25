@@ -15,6 +15,7 @@ class Todolist extends React.Component {
         }
         this.DisplayList = this.DisplayList.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.onSubmitTask = this.onSubmitTask.bind(this)
     }
     
     handleChange = (e) =>{
@@ -34,15 +35,29 @@ class Todolist extends React.Component {
         });
       };
     
+
+      deleteTask(id){
+      
+        const tasklist=[...this.state.tasks];
+        
+        const updatedList = tasklist.filter(task => task.id !== id);
+        this.setState({
+          tasks: updatedList
+        })
+      }
+
     DisplayList() {
         return this.state.tasks.map(name=> {
             return (
                 <li>
-                    {name.taskName}   
+                    {name.taskName} 
+                    <button onClick={()=> this.deleteTask(name.id) } >X</button>  
                 </li>
             )
         })
     }
+
+    
     render(){
         return(
             <div>
@@ -54,7 +69,7 @@ class Todolist extends React.Component {
                         value={this.state.task.taskName}
                         type="text"
                         id="taskInput"
-                        aria-required
+                        required
                     />
                     
                     <button type='submit'>
